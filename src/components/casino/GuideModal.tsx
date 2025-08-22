@@ -395,7 +395,10 @@ const GuideModal = ({ open, onClose }: GuideModalProps) => {
               </Button>
             ) : (
               <Button
-                onClick={() => setActiveSection(Math.min(sections.length - 1, activeSection + 1))}
+                onClick={() => {
+                  console.log("Next button clicked, current section:", activeSection);
+                  setActiveSection(Math.min(sections.length - 1, activeSection + 1));
+                }}
                 className="neomorphic-hover cursor-pointer"
               >
                 Next <ChevronRight className="h-4 w-4 ml-1" />

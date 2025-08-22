@@ -78,8 +78,11 @@ const CasinoApp = () => {
   ];
 
   const handlePoolEntry = (poolId: PoolType) => {
+    console.log("Pool entry clicked:", poolId);
     const status = entryStatus[poolId];
+    console.log("Current status:", status);
     if (status === 'ready') {
+      console.log("Setting confirm modal open");
       setConfirmModal({ open: true, pool: poolId });
     } else if (status === 'entered') {
       toast({

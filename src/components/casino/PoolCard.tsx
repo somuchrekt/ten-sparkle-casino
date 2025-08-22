@@ -179,7 +179,10 @@ const PoolCard = ({ pool, entryStatus, onEntry, onGuide }: PoolCardProps) => {
 
           {/* Entry Button */}
           <Button
-            onClick={onEntry}
+            onClick={() => {
+              console.log("Button clicked for pool:", pool.id);
+              onEntry();
+            }}
             disabled={entryStatus === 'awaiting'}
             variant={buttonProps.variant}
             className={`w-full h-10 text-sm font-semibold cursor-pointer ${buttonProps.className}`}
