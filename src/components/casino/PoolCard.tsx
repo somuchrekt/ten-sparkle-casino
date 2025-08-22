@@ -85,18 +85,18 @@ const PoolCard = ({ pool, entryStatus, onEntry, onGuide }: PoolCardProps) => {
       whileTap={{ scale: 0.98 }}
     >
       <Card className="neomorphic holographic h-full overflow-hidden">
-        <CardHeader className="pb-3">
+        <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5">
               <motion.div 
-                className="text-3xl"
+                className="text-2xl"
                 animate={{ rotate: [0, 10, -10, 0] }}
                 transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
               >
                 {pool.emoji}
               </motion.div>
               <div>
-                <CardTitle className="text-lg">{pool.name}</CardTitle>
+                <CardTitle className="text-base">{pool.name}</CardTitle>
                 <div className="flex items-center gap-2 mt-1">
                   <Badge variant="outline" className="text-xs">
                     <Clock className="h-3 w-3 mr-1" />
@@ -109,26 +109,26 @@ const PoolCard = ({ pool, entryStatus, onEntry, onGuide }: PoolCardProps) => {
               variant="ghost"
               size="sm"
               onClick={onGuide}
-              className="glass-light hover:glass-medium"
+              className="glass-light hover:glass-medium cursor-pointer"
             >
-              <HelpCircle className="h-4 w-4" />
+              <HelpCircle className="h-3 w-3" />
             </Button>
           </div>
         </CardHeader>
 
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-3">
           {/* Prize Pool */}
-          <div className="neomorphic-inset p-3 rounded-xl">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium">Prize Pool</span>
-              <Sparkles className="h-4 w-4 text-primary" />
+          <div className="neomorphic-inset p-2.5 rounded-lg">
+            <div className="flex justify-between items-center mb-1.5">
+              <span className="text-xs font-medium">Prize Pool</span>
+              <Sparkles className="h-3 w-3 text-primary" />
             </div>
-            <div className="text-2xl font-bold text-primary mb-1">
+            <div className="text-lg font-bold text-primary mb-1">
               {pool.currentPrize.toFixed(3)} TEN
             </div>
             <Progress 
               value={prizePercentage} 
-              className="h-2 bg-gray-100"
+              className="h-1.5"
             />
             <div className="text-xs text-muted-foreground mt-1">
               Max: {pool.maxPrize.toFixed(3)} TEN
@@ -136,32 +136,32 @@ const PoolCard = ({ pool, entryStatus, onEntry, onGuide }: PoolCardProps) => {
           </div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-2 gap-3">
-            <div className="glass-light p-3 rounded-xl text-center">
-              <DollarSign className="h-4 w-4 mx-auto mb-1 text-secondary" />
-              <div className="text-sm font-semibold">{pool.entryFee.toFixed(3)} TEN</div>
-              <div className="text-xs text-muted-foreground">Entry Fee</div>
+          <div className="grid grid-cols-2 gap-2">
+            <div className="glass-light p-2.5 rounded-lg text-center">
+              <DollarSign className="h-3 w-3 mx-auto mb-1 text-secondary" />
+              <div className="text-xs font-semibold">{pool.entryFee.toFixed(3)} TEN</div>
+              <div className="text-xs text-muted-foreground">Entry</div>
             </div>
-            <div className="glass-light p-3 rounded-xl text-center">
-              <Users className="h-4 w-4 mx-auto mb-1 text-accent" />
-              <div className="text-sm font-semibold">{pool.playerCount}/{pool.maxPlayers}</div>
+            <div className="glass-light p-2.5 rounded-lg text-center">
+              <Users className="h-3 w-3 mx-auto mb-1 text-accent" />
+              <div className="text-xs font-semibold">{pool.playerCount}/{pool.maxPlayers}</div>
               <div className="text-xs text-muted-foreground">Players</div>
             </div>
           </div>
 
           {/* Player Progress */}
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm">
+          <div className="space-y-1.5">
+            <div className="flex justify-between text-xs">
               <span>Pool Fill</span>
               <span>{fillPercentage.toFixed(1)}%</span>
             </div>
-            <Progress value={fillPercentage} className="h-2" />
+            <Progress value={fillPercentage} className="h-1.5" />
           </div>
 
           {/* Recent Winners */}
-          <div className="glass-light p-3 rounded-xl">
-            <div className="text-sm font-medium mb-2">Recent Winners</div>
-            <div className="h-6 overflow-hidden">
+          <div className="glass-light p-2.5 rounded-lg">
+            <div className="text-xs font-medium mb-1.5">Recent Winners</div>
+            <div className="h-5 overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={winnerIndex}
@@ -182,7 +182,7 @@ const PoolCard = ({ pool, entryStatus, onEntry, onGuide }: PoolCardProps) => {
             onClick={onEntry}
             disabled={entryStatus === 'awaiting'}
             variant={buttonProps.variant}
-            className={`w-full h-12 text-lg ${buttonProps.className}`}
+            className={`w-full h-10 text-sm font-semibold cursor-pointer ${buttonProps.className}`}
           >
             {buttonProps.text}
           </Button>

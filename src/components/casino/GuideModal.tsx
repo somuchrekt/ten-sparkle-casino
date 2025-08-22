@@ -387,13 +387,16 @@ const GuideModal = ({ open, onClose }: GuideModalProps) => {
             </Button>
             
             {activeSection === sections.length - 1 ? (
-              <Button onClick={onClose} className="neomorphic-hover">
+              <Button 
+                onClick={onClose} 
+                className="neomorphic-hover cursor-pointer"
+              >
                 Start Playing
               </Button>
             ) : (
               <Button
                 onClick={() => setActiveSection(Math.min(sections.length - 1, activeSection + 1))}
-                className="neomorphic-hover"
+                className="neomorphic-hover cursor-pointer"
               >
                 Next <ChevronRight className="h-4 w-4 ml-1" />
               </Button>
