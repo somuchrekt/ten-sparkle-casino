@@ -129,11 +129,11 @@ const GuideModal = ({ open, onClose }: GuideModalProps) => {
               <div className="grid grid-cols-3 gap-2 text-sm">
                 <div>
                   <div className="text-xs text-muted-foreground">Entry</div>
-                  <div className="font-semibold">0.001 TEN</div>
+                  <div className="font-semibold">0.001 ETH</div>
                 </div>
                 <div>
                   <div className="text-xs text-muted-foreground">Max Prize</div>
-                  <div className="font-semibold">0.05 TEN</div>
+                  <div className="font-semibold">0.05 ETH</div>
                 </div>
                 <div>
                   <div className="text-xs text-muted-foreground">Timer</div>
@@ -156,11 +156,11 @@ const GuideModal = ({ open, onClose }: GuideModalProps) => {
               <div className="grid grid-cols-3 gap-2 text-sm">
                 <div>
                   <div className="text-xs text-muted-foreground">Entry</div>
-                  <div className="font-semibold">0.002 TEN</div>
+                  <div className="font-semibold">0.002 ETH</div>
                 </div>
                 <div>
                   <div className="text-xs text-muted-foreground">Max Prize</div>
-                  <div className="font-semibold">0.12 TEN</div>
+                  <div className="font-semibold">0.12 ETH</div>
                 </div>
                 <div>
                   <div className="text-xs text-muted-foreground">Timer</div>
@@ -183,11 +183,11 @@ const GuideModal = ({ open, onClose }: GuideModalProps) => {
               <div className="grid grid-cols-3 gap-2 text-sm">
                 <div>
                   <div className="text-xs text-muted-foreground">Entry</div>
-                  <div className="font-semibold">0.003 TEN</div>
+                  <div className="font-semibold">0.003 ETH</div>
                 </div>
                 <div>
                   <div className="text-xs text-muted-foreground">Max Prize</div>
-                  <div className="font-semibold">0.21 TEN</div>
+                  <div className="font-semibold">0.21 ETH</div>
                 </div>
                 <div>
                   <div className="text-xs text-muted-foreground">Timer</div>
@@ -210,11 +210,11 @@ const GuideModal = ({ open, onClose }: GuideModalProps) => {
               <div className="grid grid-cols-3 gap-2 text-sm">
                 <div>
                   <div className="text-xs text-muted-foreground">Entry</div>
-                  <div className="font-semibold">0.005 TEN</div>
+                  <div className="font-semibold">0.005 ETH</div>
                 </div>
                 <div>
                   <div className="text-xs text-muted-foreground">Max Prize</div>
-                  <div className="font-semibold">0.40 TEN</div>
+                  <div className="font-semibold">0.40 ETH</div>
                 </div>
                 <div>
                   <div className="text-xs text-muted-foreground">Timer</div>
@@ -418,13 +418,13 @@ const GuideModal = ({ open, onClose }: GuideModalProps) => {
                 Start Playing
               </Button>
             ) : (
-              <Button
-                onClick={handleNextClick}
-                className="neomorphic-hover pointer-events-auto"
-                style={{ pointerEvents: 'auto' }}
-              >
-                Next <ChevronRight className="h-4 w-4 ml-1" />
-              </Button>
+            <Button
+              onClick={handleNextClick}
+              className="neomorphic-hover pointer-events-auto z-50"
+              style={{ pointerEvents: 'auto', position: 'relative', zIndex: 50 }}
+            >
+              Next <ChevronRight className="h-4 w-4 ml-1" />
+            </Button>
             )}
           </div>
         </Tabs>

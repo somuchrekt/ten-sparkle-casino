@@ -101,21 +101,21 @@ const PoolCard = ({ pool, entryStatus, onEntry, onGuide }: PoolCardProps) => {
       style={{ pointerEvents: 'auto' }}
     >
       <Card className="neomorphic holographic h-full overflow-hidden" style={{ pointerEvents: 'auto' }}>
-        <CardHeader className="pb-2">
+        <CardHeader className="pb-1 px-3 pt-3">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2">
               <motion.div 
-                className="text-2xl"
+                className="text-lg"
                 animate={{ rotate: [0, 10, -10, 0] }}
                 transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
               >
                 {pool.emoji}
               </motion.div>
               <div>
-                <CardTitle className="text-base">{pool.name}</CardTitle>
-                <div className="flex items-center gap-2 mt-1">
-                  <Badge variant="outline" className="text-xs">
-                    <Clock className="h-3 w-3 mr-1" />
+                <CardTitle className="text-sm">{pool.name}</CardTitle>
+                <div className="flex items-center gap-1 mt-0.5">
+                  <Badge variant="outline" className="text-xs px-1 py-0">
+                    <Clock className="h-2.5 w-2.5 mr-1" />
                     {formatTime(timeLeft)}
                   </Badge>
                 </div>
@@ -125,60 +125,60 @@ const PoolCard = ({ pool, entryStatus, onEntry, onGuide }: PoolCardProps) => {
               variant="ghost"
               size="sm"
               onClick={handleGuideClick}
-              className="glass-light hover:glass-medium pointer-events-auto z-10"
+              className="glass-light hover:glass-medium pointer-events-auto z-10 p-1 h-6 w-6"
               style={{ pointerEvents: 'auto' }}
             >
-              <HelpCircle className="h-3 w-3" />
+              <HelpCircle className="h-2.5 w-2.5" />
             </Button>
           </div>
         </CardHeader>
 
-        <CardContent className="space-y-3">
+        <CardContent className="space-y-2 px-3 pb-3">
           {/* Prize Pool */}
-          <div className="neomorphic-inset p-2.5 rounded-lg">
-            <div className="flex justify-between items-center mb-1.5">
+          <div className="neomorphic-inset p-2 rounded-lg">
+            <div className="flex justify-between items-center mb-1">
               <span className="text-xs font-medium">Prize Pool</span>
-              <Sparkles className="h-3 w-3 text-primary" />
+              <Sparkles className="h-2.5 w-2.5 text-primary" />
             </div>
-            <div className="text-lg font-bold text-primary mb-1">
-              {pool.currentPrize.toFixed(3)} TEN
+            <div className="text-sm font-bold text-primary mb-0.5">
+              {pool.currentPrize.toFixed(3)} ETH
             </div>
             <Progress 
               value={prizePercentage} 
-              className="h-1.5"
+              className="h-1"
             />
-            <div className="text-xs text-muted-foreground mt-1">
-              Max: {pool.maxPrize.toFixed(3)} TEN
+            <div className="text-xs text-muted-foreground mt-0.5">
+              Max: {pool.maxPrize.toFixed(3)} ETH
             </div>
           </div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-2 gap-2">
-            <div className="glass-light p-2.5 rounded-lg text-center">
-              <DollarSign className="h-3 w-3 mx-auto mb-1 text-secondary" />
-              <div className="text-xs font-semibold">{pool.entryFee.toFixed(3)} TEN</div>
+          <div className="grid grid-cols-2 gap-1.5">
+            <div className="glass-light p-1.5 rounded text-center">
+              <DollarSign className="h-2.5 w-2.5 mx-auto mb-0.5 text-secondary" />
+              <div className="text-xs font-semibold">{pool.entryFee.toFixed(3)} ETH</div>
               <div className="text-xs text-muted-foreground">Entry</div>
             </div>
-            <div className="glass-light p-2.5 rounded-lg text-center">
-              <Users className="h-3 w-3 mx-auto mb-1 text-accent" />
+            <div className="glass-light p-1.5 rounded text-center">
+              <Users className="h-2.5 w-2.5 mx-auto mb-0.5 text-accent" />
               <div className="text-xs font-semibold">{pool.playerCount}/{pool.maxPlayers}</div>
               <div className="text-xs text-muted-foreground">Players</div>
             </div>
           </div>
 
           {/* Player Progress */}
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             <div className="flex justify-between text-xs">
               <span>Pool Fill</span>
               <span>{fillPercentage.toFixed(1)}%</span>
             </div>
-            <Progress value={fillPercentage} className="h-1.5" />
+            <Progress value={fillPercentage} className="h-1" />
           </div>
 
           {/* Recent Winners */}
-          <div className="glass-light p-2.5 rounded-lg">
-            <div className="text-xs font-medium mb-1.5">Recent Winners</div>
-            <div className="h-5 overflow-hidden">
+          <div className="glass-light p-1.5 rounded">
+            <div className="text-xs font-medium mb-1">Recent Winners</div>
+            <div className="h-4 overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={winnerIndex}
@@ -199,7 +199,7 @@ const PoolCard = ({ pool, entryStatus, onEntry, onGuide }: PoolCardProps) => {
             onClick={handleEntryClick}
             disabled={entryStatus === 'awaiting'}
             variant={buttonProps.variant}
-            className={`w-full h-10 text-sm font-semibold relative z-10 ${buttonProps.className}`}
+            className={`w-full h-8 text-xs font-semibold relative z-10 ${buttonProps.className}`}
             style={{ pointerEvents: entryStatus === 'awaiting' ? 'none' : 'auto' }}
           >
             {buttonProps.text}
