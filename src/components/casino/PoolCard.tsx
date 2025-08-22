@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -58,19 +59,19 @@ const PoolCard = ({ pool, entryStatus, onEntry, onGuide }: PoolCardProps) => {
         return {
           text: 'Enter Pool',
           variant: 'default' as const,
-          className: 'neomorphic-hover animate-glow'
+          className: 'neomorphic-hover animate-glow pointer-events-auto'
         };
       case 'entered':
         return {
           text: 'Entered ✓',
           variant: 'secondary' as const,
-          className: 'neomorphic'
+          className: 'neomorphic pointer-events-auto'
         };
       case 'awaiting':
         return {
           text: 'Processing...',
           variant: 'outline' as const,
-          className: 'neomorphic animate-pulse'
+          className: 'neomorphic animate-pulse pointer-events-none'
         };
     }
   };
@@ -79,12 +80,27 @@ const PoolCard = ({ pool, entryStatus, onEntry, onGuide }: PoolCardProps) => {
   const fillPercentage = (pool.playerCount / pool.maxPlayers) * 100;
   const prizePercentage = (pool.currentPrize / pool.maxPrize) * 100;
 
+  const handleEntryClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("Button clicked for pool:", pool.id, "Status:", entryStatus);
+    onEntry();
+  };
+
+  const handleGuideClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("Guide button clicked");
+    onGuide();
+  };
+
   return (
     <motion.div
       whileHover={{ scale: 1.02, y: -4 }}
       whileTap={{ scale: 0.98 }}
+      style={{ pointerEvents: 'auto' }}
     >
-      <Card className="neomorphic holographic h-full overflow-hidden">
+      <Card className="neomorphic holographic h-full overflow-hidden" style={{ pointerEvents: 'auto' }}>
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
@@ -108,8 +124,9 @@ const PoolCard = ({ pool, entryStatus, onEntry, onGuide }: PoolCardProps) => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={onGuide}
-              className="glass-light hover:glass-medium cursor-pointer"
+              onClick={handleGuideClick}
+              className="glass-light hover:glass-medium pointer-events-auto z-10"
+              style={{ pointerEvents: 'auto' }}
             >
               <HelpCircle className="h-3 w-3" />
             </Button>
@@ -179,13 +196,11 @@ const PoolCard = ({ pool, entryStatus, onEntry, onGuide }: PoolCardProps) => {
 
           {/* Entry Button */}
           <Button
-            onClick={() => {
-              console.log("Button clicked for pool:", pool.id);
-              onEntry();
-            }}
+            onClick={handleEntryClick}
             disabled={entryStatus === 'awaiting'}
             variant={buttonProps.variant}
-            className={`w-full h-10 text-sm font-semibold cursor-pointer ${buttonProps.className}`}
+            className={`w-full h-10 text-sm font-semibold relative z-10 ${buttonProps.className}`}
+            style={{ pointerEvents: entryStatus === 'awaiting' ? 'none' : 'auto' }}
           >
             {buttonProps.text}
           </Button>

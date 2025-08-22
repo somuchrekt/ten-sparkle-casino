@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Header from "@/components/casino/Header";
@@ -78,22 +79,34 @@ const CasinoApp = () => {
   ];
 
   const handlePoolEntry = (poolId: PoolType) => {
-    console.log("Pool entry clicked:", poolId);
+    console.log("=== Pool entry handler called ===");
+    console.log("Pool ID:", poolId);
     const status = entryStatus[poolId];
     console.log("Current status:", status);
+    
     if (status === 'ready') {
-      console.log("Setting confirm modal open");
+      console.log("Opening confirmation modal for pool:", poolId);
       setConfirmModal({ open: true, pool: poolId });
+      console.log("Modal state set to open");
     } else if (status === 'entered') {
+      console.log("Pool already entered, showing toast");
       toast({
         title: "Already Entered",
         description: "You're already in this pool. Good luck!",
       });
+    } else {
+      console.log("Pool entry awaiting, no action");
     }
   };
 
   const confirmEntry = async () => {
-    if (!confirmModal.pool) return;
+    console.log("=== Confirm entry called ===");
+    if (!confirmModal.pool) {
+      console.log("No pool selected for confirmation");
+      return;
+    }
+    
+    console.log("Processing entry for pool:", confirmModal.pool);
     
     // Simulate blockchain transaction
     setEntryStatus(prev => ({ ...prev, [confirmModal.pool!]: 'awaiting' }));
@@ -113,6 +126,16 @@ const CasinoApp = () => {
         variant: "default"
       });
     }, 3000);
+  };
+
+  const handleGuideOpen = () => {
+    console.log("=== Opening guide modal ===");
+    setGuideModal(true);
+  };
+
+  const handleGuideClose = () => {
+    console.log("=== Closing guide modal ===");
+    setGuideModal(false);
   };
 
   const renderMainContent = () => {
@@ -138,7 +161,7 @@ const CasinoApp = () => {
                   pool={pool}
                   entryStatus={entryStatus[pool.id]}
                   onEntry={() => handlePoolEntry(pool.id)}
-                  onGuide={() => setGuideModal(true)}
+                  onGuide={handleGuideOpen}
                 />
               </motion.div>
             ))}
@@ -149,7 +172,7 @@ const CasinoApp = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header onGuide={() => setGuideModal(true)} />
+      <Header onGuide={handleGuideOpen} />
       
       <div className="flex flex-1">
         <LeftSidebar 
@@ -174,13 +197,16 @@ const CasinoApp = () => {
       <ConfirmationModal
         open={confirmModal.open}
         pool={confirmModal.pool ? pools.find(p => p.id === confirmModal.pool) : undefined}
-        onClose={() => setConfirmModal({ open: false })}
+        onClose={() => {
+          console.log("=== Closing confirmation modal ===");
+          setConfirmModal({ open: false });
+        }}
         onConfirm={confirmEntry}
       />
 
       <GuideModal
         open={guideModal}
-        onClose={() => setGuideModal(false)}
+        onClose={handleGuideClose}
       />
     </div>
   );

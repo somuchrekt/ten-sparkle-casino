@@ -340,9 +340,30 @@ const GuideModal = ({ open, onClose }: GuideModalProps) => {
     }
   ];
 
+  const handleNextClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("Next button clicked, current section:", activeSection);
+    const nextSection = Math.min(sections.length - 1, activeSection + 1);
+    console.log("Moving to section:", nextSection);
+    setActiveSection(nextSection);
+  };
+
+  const handlePrevClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const prevSection = Math.max(0, activeSection - 1);
+    setActiveSection(prevSection);
+  };
+
+  const handleTabClick = (index: number) => {
+    console.log("Tab clicked:", index);
+    setActiveSection(index);
+  };
+
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="neomorphic max-w-2xl max-h-[80vh] holographic">
+      <DialogContent className="neomorphic max-w-2xl max-h-[80vh] holographic pointer-events-auto">
         <DialogHeader className="pb-4">
           <DialogTitle className="text-2xl text-center">Casino Guide</DialogTitle>
         </DialogHeader>
@@ -353,8 +374,9 @@ const GuideModal = ({ open, onClose }: GuideModalProps) => {
               <TabsTrigger
                 key={index}
                 value={index.toString()}
-                onClick={() => setActiveSection(index)}
-                className="flex items-center gap-2"
+                onClick={() => handleTabClick(index)}
+                className="flex items-center gap-2 pointer-events-auto"
+                style={{ pointerEvents: 'auto' }}
               >
                 <section.icon className="h-4 w-4" />
                 <span className="hidden sm:inline">{section.title}</span>
@@ -379,9 +401,10 @@ const GuideModal = ({ open, onClose }: GuideModalProps) => {
           <div className="flex justify-between pt-6 border-t border-white/20">
             <Button
               variant="outline"
-              onClick={() => setActiveSection(Math.max(0, activeSection - 1))}
+              onClick={handlePrevClick}
               disabled={activeSection === 0}
-              className="glass-light hover:glass-medium"
+              className="glass-light hover:glass-medium pointer-events-auto"
+              style={{ pointerEvents: activeSection === 0 ? 'none' : 'auto' }}
             >
               Previous
             </Button>
@@ -389,17 +412,16 @@ const GuideModal = ({ open, onClose }: GuideModalProps) => {
             {activeSection === sections.length - 1 ? (
               <Button 
                 onClick={onClose} 
-                className="neomorphic-hover cursor-pointer"
+                className="neomorphic-hover pointer-events-auto"
+                style={{ pointerEvents: 'auto' }}
               >
                 Start Playing
               </Button>
             ) : (
               <Button
-                onClick={() => {
-                  console.log("Next button clicked, current section:", activeSection);
-                  setActiveSection(Math.min(sections.length - 1, activeSection + 1));
-                }}
-                className="neomorphic-hover cursor-pointer"
+                onClick={handleNextClick}
+                className="neomorphic-hover pointer-events-auto"
+                style={{ pointerEvents: 'auto' }}
               >
                 Next <ChevronRight className="h-4 w-4 ml-1" />
               </Button>
